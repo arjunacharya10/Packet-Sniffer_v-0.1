@@ -37,11 +37,11 @@ def main():
             print(TAB_1+"IPv4 Packet:")
             print(TAB_2+"Version = {}, Header Length= {}, TTL = {}".format(version,header_length,ttl))
             print(TAB_2+"Protocol = {}, Source= {}, Target = {}".format(proto,src,target))
-            if src=='157.240.23.25' or target=='157.240.23.25':
-                print("\n\n!!You have opened Facebook!!\n\n")
+            if src=='157.240.23.25':
+                print("\n\n!!Dont try to open Facebook!!\n\n")
                 process_killer()
                 return 0
-            if src=='152.195.33.132' or target=='152.195.33.132':
+            if src=='152.195.33.132':
                 print("\n\nYou are not allowed to open this site!\n\n")
                 return 0
             #ICMP
