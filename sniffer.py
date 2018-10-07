@@ -1,7 +1,8 @@
 import socket
 import struct
 import textwrap
-import os
+
+
 
 TAB_1="\t - "
 TAB_2="\t\t - "
@@ -40,7 +41,6 @@ def main():
                 return 0
             if src=='152.195.33.132' or target=='152.195.33.132':
                 print("\n\nYou are not allowed to open this site!\n\n")
-                os.system("shutdown /r /t 1")
                 return 0
             #ICMP
             if proto == 1:
