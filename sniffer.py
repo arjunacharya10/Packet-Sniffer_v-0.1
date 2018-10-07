@@ -15,6 +15,11 @@ DATA_TAB_4="\t\t\t\t "
 def main():
     conn = socket.socket(socket.AF_PACKET,socket.SOCK_RAW,socket.ntohs(3))
     
+    print("\n\nWelcome to packet sniffer v 0.1:!\n\n")
+    print("Would you like us to sniff your packets? (yes/no)")
+    choice=input()
+    if choice=="no":
+        return 0
     
     while True:
         raw_data,addr=conn.recvfrom(65536)
