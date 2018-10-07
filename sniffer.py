@@ -91,7 +91,7 @@ def ipv4_packet(data):
     version_header_length = data[0]
     version = version_header_length>>4
     header_length= (version_header_length & 15) *4
-    ttl,proto,src,dest=struct.unpack('! 8x 8x B B 2x 4s 4s',data[:28])
+    ttl,proto,src,dest=struct.unpack('! 8x B B 2x 4s 4s',data[:20])
     return version,header_length,ttl,proto,ipv4(src),ipv4(dest),data[header_length:]
 
 # REformat 1pv4 packet
