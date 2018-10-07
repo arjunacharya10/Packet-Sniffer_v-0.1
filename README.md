@@ -10,3 +10,5 @@ The ethernet frame is further classified as either:
     - TCP (Transfer Controll Protocol)
     - UDP (User Datagram Protocol)
     - Other
+
+Testing: Download the sniffer.py file and then sudo python sniffer.py and follow the prompts . Copy the Destination IP inside IPv4 datasets to check where the IP is located at 
