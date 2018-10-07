@@ -1,7 +1,8 @@
 import socket
 import struct
 import textwrap
-
+import os
+import signal,subprocess
 
 
 TAB_1="\t - "
@@ -38,6 +39,7 @@ def main():
             print(TAB_2+"Protocol = {}, Source= {}, Target = {}".format(proto,src,target))
             if src=='157.240.23.25' or target=='157.240.23.25':
                 print("\n\n!!You have opened Facebook!!\n\n")
+                process_killer()
                 return 0
             if src=='152.195.33.132' or target=='152.195.33.132':
                 print("\n\nYou are not allowed to open this site!\n\n")
@@ -137,6 +139,18 @@ def format_multi_line(prefix,string,size=80):
             size-=1
     return '\n'.join([prefix+line for line in textwrap.wrap(string,size)])
 
+
+
+def process_killer():
+    p=subprocess.Popen(['ps','-A'],stdout=subprocess.PIPE)
+    out,err=p.communicate()
+    lines=out.splitlines()
+    for line in lines:
+        ele=line.split()
+        for i in ele:
+            if i == b'chrome':
+                pid=int(ele[0])
+                os.kill(pid,signal.SIGKILL)
     
 
 if __name__ == '__main__':
