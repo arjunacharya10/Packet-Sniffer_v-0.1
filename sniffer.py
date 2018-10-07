@@ -19,8 +19,10 @@ def main():
     print("Would you like us to sniff your packets? (yes/no)")
     choice=input()
     if choice=="no":
+        print("Thank you for your time!")
         return 0
     
+    print("Sniffing has begun!!- u will get tons of output shortly")
     while True:
         raw_data,addr=conn.recvfrom(65536)
         d_mac,s_mac,eth_prot,data=ethernet_frame(raw_data)
