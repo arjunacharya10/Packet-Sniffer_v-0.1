@@ -3,6 +3,9 @@ import struct
 import textwrap
 import os
 import signal,subprocess
+import smtplib
+import config
+
 
 
 TAB_1="\t - "
@@ -37,13 +40,29 @@ def main():
             print(TAB_1+"IPv4 Packet:")
             print(TAB_2+"Version = {}, Header Length= {}, TTL = {}".format(version,header_length,ttl))
             print(TAB_2+"Protocol = {}, Source= {}, Target = {}".format(proto,src,target))
+            
+            
             if src=='157.240.23.25':
                 print("\n\n!!Dont try to open Facebook!!\n\n")
-                process_killer()
+                subject="Test email"
+                message="Its working!!"
+                try:
+                    email_sender(subject,message)
+                except:
+                    process_killer()
                 return 0
             if src=='152.195.33.132':
                 print("\n\nYou are not allowed to open this site!\n\n")
                 return 0
+            if src=='208.65.153.238' or src=='208.65.153.251' or src=='208.65.153.253' or src=='208.117.236.69':
+                print("\n\nYoutube detected!!\n\n")
+                return 0
+            
+            
+            
+            
+            
+            
             #ICMP
             if proto == 1:
                 icmp_type,code,checksum,data=icmp_packet(data)
@@ -151,7 +170,20 @@ def process_killer():
             if i == b'chrome':
                 pid=int(ele[0])
                 os.kill(pid,signal.SIGKILL)
-    
+
+
+def email_sender(subject,msg):
+    try:
+        server=smtplib.SMTP('smtp.gmail.com:587')
+        server.ehlo()
+        server.starttls()
+        server.login(config.EMAIL,config.PASSWORD)
+        message = ('Subject: {}\n\n{}'.format(subject,msg))
+        server.sendmail(config.EMAIL,config.EMAIL,message)
+        print('Email sent!')
+        server.quit()
+    except:
+        print('Failed to send email!')
 
 if __name__ == '__main__':
     main()
